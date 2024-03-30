@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: jenkins
+  labels:
+    app: jenkins
+spec:
+  containers: 
+    - name: jenkins
+      image: jenkins/jenkins:lts
+  nodeSelector:
+    node: my_worker1
