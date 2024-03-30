@@ -14,6 +14,6 @@ spec:
         nodeSelectorTerms:
           - matchExpressions:
             - key: "node"
-              operator: NotIn
+              operator: In
               values:
                 - my_worker2
