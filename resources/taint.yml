@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-jenkins
+  labels:
+    app: jenkins
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:2.303.1
+      nodeSelector:
+        name: worker2
+      tolerations:
+        - key: "colour"
+          operator: "Equal"
+          value: "red"
+          effect: "NoSchedule"
