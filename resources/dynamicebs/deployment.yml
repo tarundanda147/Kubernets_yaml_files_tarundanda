@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-jenkins
+  labels:
+    app: jenkins
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      securityContext:
+        fsGroup: 1000 
+        runAsUser: 0
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts   
+          volumeMounts: 
+            - name: my-jenkins-efs
+              mountPath: /var/jenkins_home             
+      volumes:
+        - name: my-jenkins-efs
+          persistentVolumeClaim:
+            claimName: efs-dynamic
