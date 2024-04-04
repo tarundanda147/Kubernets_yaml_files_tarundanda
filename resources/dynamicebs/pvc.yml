@@ -4,7 +4,7 @@ metadata:
   name: ebs-dynamic
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: ebs-sc
   resources:
     requests:
