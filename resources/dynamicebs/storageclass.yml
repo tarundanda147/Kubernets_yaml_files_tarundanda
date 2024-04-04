@@ -1,6 +1,6 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: eds-sc
-provisioner: eds.csi.aws.com
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
