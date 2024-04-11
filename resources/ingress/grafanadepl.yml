@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - name: grafana
+          image: grafana/grafana:latest
+          env:
+            - name: GF_PATH_PREFIX
+              value: --prefix=/grafana
+          volumeMounts:
+            - name: grafana-conf
+              mountPath: "/usr/share/grafana/conf/defaults.ini"
+              subPath: "defaults.ini"
+      volumes:
+        - name: grafana-conf
+          configMap:
+            name: grafana-conf-new        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-node
+spec:
+  type: ClusterIP
+  selector:
+    app: grafana
+  ports:
+    - name: podport
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
