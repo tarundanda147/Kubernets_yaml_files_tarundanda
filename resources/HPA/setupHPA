@@ -1,0 +1,4 @@
+"https://www.kubecost.com/kubernetes-autoscaling/kubernetes-hpa"    
+for autoscaling detailed info use the above link
+
+first clone this Repo "https://github.com/nonai/k8s-example-files.git" and use kubectl apply -f k8s-example-files.git/metrics-server
