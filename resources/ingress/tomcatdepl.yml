@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myreplica
+  labels:
+    app: tomcat
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxSurge: 1
+      maxUnavailable: 0
+  selector: 
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      name: tomcat-2
+      labels:
+        app: myapp
+    spec:
+      containers: 
+        - name: tomcat-container
+          image: tomcat:8.0
+          env:
+            - name: TOMCAT_OPTS
+              value: --prefix=/tomcat
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: tomcat
+spec:
+  type: ClusterIP
+  selector:
+    app: myapp
+  ports:
+    - name: port
+      protocol: TCP
+      port: 8085
+      targetPort: 8080
