@@ -5,6 +5,10 @@ helm create jenkins
 
 
 
+helm install jenkins ./jenkins --dry-run
+
+
+
 
 helm install jenkins ./jenkins
 
