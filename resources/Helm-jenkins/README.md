@@ -10,7 +10,11 @@ helm install jenkins ./jenkins --dry-run
 
 
 
-helm install jenkins ./jenkins
+helm install jenkins ./jenkins 
+
+or
+
+helm install --create-namespace jenkins ./jenkins --namespace jenkins
 
 
 
