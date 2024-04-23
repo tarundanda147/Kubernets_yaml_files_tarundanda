@@ -1,3 +1,6 @@
+#kubectl label nodes <node-name> <label-key>=<label-value>(command to label a node)
+
+
 apiVersion: v1
 kind: Pod
 metadata: 
