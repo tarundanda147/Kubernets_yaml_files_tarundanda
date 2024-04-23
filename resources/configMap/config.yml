@@ -1,3 +1,6 @@
+#kubectl create configmap <configmap-name> --from-file=<path/to/file> --from-literal=<key>=<value> --namespace=<namespace>
+
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
